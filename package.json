@@ -4,7 +4,9 @@
   "description": "",
   "main": "src/000.js",
   "scripts": {
-    "start": "node src/000.js"
+    "start": "node src/000.js",
+    "docker:build": "docker build -t quest:$(git rev-parse --short HEAD) . && docker tag quest:$(git rev-parse --short HEAD) quest:latest",
+    "docker:dev": "./scripts/docker-dev.sh"
   },
   "dependencies": {
     "express": "~4.16.3"
