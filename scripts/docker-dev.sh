@@ -10,8 +10,8 @@ docker run \
     --name quest-dev \
     --detach \
     -p 80 \
-    -v $(pwd)/src:/opt/rearc/src \
-    -v $(pwd)/bin:/opt/rearc/bin \
+    -v $(pwd)/src:/opt/quest/src \
+    -v $(pwd)/bin:/opt/quest/bin \
     quest:latest;
 
 echo <<EOF
