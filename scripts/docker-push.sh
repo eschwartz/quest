@@ -19,9 +19,10 @@ which aws || echo "${no_aws_err}";
 # Alternatively, if using terraform
 # this is a great use-case for outputs:
 # See https://www.terraform.io/language/values/outputs
-account_number=$(aws sts get-caller-identity --query Account --output text);
+# account_number=$(aws sts get-caller-identity --query Account --output text);
 aws_region=$(aws configure get region);
-ecr_url="${account_number}.dkr.ecr.${aws_region}.amazonaws.com";
+# ecr_url="${account_number}.dkr.ecr.${aws_region}.amazonaws.com";
+ecr_url=$(cd terraform && terraform output -raw ecr_url);
 
 # login to ecr, with docker
 aws ecr get-login-password --region ${aws_region} | \
@@ -31,8 +32,8 @@ aws ecr get-login-password --region ${aws_region} | \
         ${ecr_url};
 
 # Tag the image, for upload
-docker tag ${image_tag} "${ecr_url}/${image_tag}";
+docker tag "quest:${image_tag}" "${ecr_url}:${image_tag}";
 
 # Push the image
-docker push "${ecr_url}/${image_tag}";
+docker push "${ecr_url}:${image_tag}";
 

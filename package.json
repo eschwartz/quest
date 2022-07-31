@@ -8,7 +8,7 @@
     "docker:build": "docker build -t quest:$(git rev-parse --short HEAD) . && docker tag quest:$(git rev-parse --short HEAD) quest:latest",
     "docker:dev": "./scripts/docker-dev.sh",
     "docker:shell": "docker exec -it quest-dev bash",
-    "docker:push": "./scripts/docker-push.sh quest:latest",
+    "docker:push": "./scripts/docker-push.sh latest",
     "deploy": "./scripts/deploy.sh"
   },
   "dependencies": {
