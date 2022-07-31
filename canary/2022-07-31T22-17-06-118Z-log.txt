@@ -1,0 +1,128 @@
+Start Canary
+INFO: Event: {"canaryName":"quest-index","s3BaseFilePath":"cw-syn-results-507409530905-us-east-1/canary/us-east-1/quest-index-18a-b1366472170b","customerCanaryHandlerName":"pageLoadBlueprint.handler","customerCanaryCodeLocation":"arn:aws:lambda:us-east-1:507409530905:layer:cwsyn-quest-index-b4c9140a-1d12-4f9f-b04c-87d422f1acee:1","invocationTime":1659305824882,"runtimeVersion":"syn-nodejs-puppeteer-3.6","visualReference":null,"s3EncryptionMode":null,"s3KmsKeyArn":null,"activeTracing":false,"canaryRunId":"62f54979-3f77-4ff0-998b-7eff38d99f46"}
+INFO: Context: {"callbackWaitsForEmptyEventLoop":true,"functionVersion":"1","functionName":"cwsyn-quest-index-b4c9140a-1d12-4f9f-b04c-87d422f1acee","memoryLimitInMB":"1000","logGroupName":"/aws/lambda/cwsyn-quest-index-b4c9140a-1d12-4f9f-b04c-87d422f1acee","logStreamName":"2022/07/31/[1]017f5bbb29aa4e8a96ea59b6e3e18b1f","invokedFunctionArn":"arn:aws:lambda:us-east-1:507409530905:function:cwsyn-quest-index-b4c9140a-1d12-4f9f-b04c-87d422f1acee:1","awsRequestId":"b11ca058-e3ec-4f42-8269-2d59622d7290"}
+INFO: Recording configuration:
+INFO: Canary Name: quest-index
+INFO: Canary Arn: arn:aws:synthetics:us-east-1:507409530905:canary:quest-index
+INFO: Canary lambda invoked at: Sun Jul 31 2022 22:17:04 GMT+0000 (Coordinated Universal Time)
+INFO: AWS account Id: 507409530905 and region us-east-1
+INFO: S3 Artifact base location: cw-syn-results-507409530905-us-east-1/canary/us-east-1/quest-index-18a-b1366472170b
+INFO: Artifacts will be encrypted using default KMS key for s3
+INFO: Configuring tracing: canaryName: quest-index canaryArn: arn:aws:synthetics:us-east-1:507409530905:canary:quest-index canaryRunId: 62f54979-3f77-4ff0-998b-7eff38d99f46
+INFO: Setting ActiveTracing to: false
+INFO: memoryLimitInMB: 1000
+INFO: awsRequestId: b11ca058-e3ec-4f42-8269-2d59622d7290
+INFO: timeRemainingInMillis: 839979
+INFO: Getting S3 location for uploading files
+INFO: S3 destination for uploading artifacts determined: {"s3Bucket":"cw-syn-results-507409530905-us-east-1","s3Key":"canary/us-east-1/quest-index-18a-b1366472170b/2022/07/31/22/17-04-882"}
+INFO: S3 Bucket location determined: us-east-1
+INFO: Launching Puppeteer browser with options: {"args":["--allow-running-insecure-content","--autoplay-policy=user-gesture-required","--disable-component-update","--disable-domain-reliability","--disable-features=AudioServiceOutOfProcess,IsolateOrigins,site-per-process","--disable-print-preview","--disable-setuid-sandbox","--disable-site-isolation-trials","--disable-speech-api","--disable-web-security","--disk-cache-size=33554432","--enable-features=SharedArrayBuffer","--hide-scrollbars","--ignore-gpu-blocklist","--in-process-gpu","--mute-audio","--no-default-browser-check","--no-pings","--no-sandbox","--no-zygote","--use-gl=swiftshader","--window-size=1920,1080","--single-process"],"defaultViewport":{"deviceScaleFactor":1,"hasTouch":false,"height":1080,"isLandscape":true,"isMobile":false,"width":1920},"headless":true,"executablePath":"/tmp/chromium"}
+INFO: Creating a new page.
+INFO: Setting up page events.
+INFO: Adding CloudWatchSynthetics/arn:aws:synthetics:us-east-1:507409530905:canary:quest-index to user agent header sent with each outbound request.
+INFO: Creating Puppeteer HAR object.
+INFO: Starting HAR file logging.
+INFO: Start executing customer steps
+INFO: Customer canary entry file name: "pageLoadBlueprint"
+INFO: Customer canary entry function name: "handler"
+INFO: Calling customer canary: /opt/nodejs/node_modules/pageLoadBlueprint.handler()
+INFO: Step starting: rearc.livepoll.link URL: about:blank
+INFO: Request: GET https://rearc.livepoll.link/; ResourceType: document
+INFO: Response: 200 OK https://rearc.livepoll.link/
+INFO: Request: GET https://www.rearc.io/wp-includes/css/dist/block-library/style.min.css?ver=5.9.3; ResourceType: stylesheet
+INFO: Request: GET https://www.rearc.io/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.1.7; ResourceType: stylesheet
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/css/rgs.css?ver=9.0.1; ResourceType: stylesheet
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/css/font-awesome.min.css?ver=4.6.4; ResourceType: stylesheet
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/style.css?ver=9.0.1; ResourceType: stylesheet
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/css/jquery.fancybox.css?ver=9.0; ResourceType: stylesheet
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/css/responsive.css?ver=9.0.1; ResourceType: stylesheet
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/css/skin-material.css?ver=9.0.1; ResourceType: stylesheet
+INFO: Request: GET https://www.rearc.io/wp-content/plugins/google-analytics-dashboard-for-wp/assets/js/frontend.min.js?ver=6.0.2; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-includes/js/jquery/jquery.min.js?ver=3.6.0; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2; ResourceType: script
+INFO: Request: GET https://www.google-analytics.com/analytics.js; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-includes/js/wp-emoji-release.min.js?ver=5.9.3; ResourceType: script
+INFO: Response: 200 https://www.rearc.io/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.1.7
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/css/font-awesome.min.css?ver=4.6.4
+INFO: Response: 200 https://www.rearc.io/wp-includes/css/dist/block-library/style.min.css?ver=5.9.3
+INFO: Request: GET https://www.rearc.io/wp-content/uploads/2018/11/Logo.png; ResourceType: image
+INFO: Request: GET https://www.rearc.io/wp-content/uploads/2019/07/quest.gif; ResourceType: image
+INFO: Request: GET https://rearc.livepoll.link/wp-content/uploads/2018/12/rearc_logo_darkbackground_cmyk_2.png; ResourceType: image
+INFO: Request: GET https://www.rearc.io/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.1.7; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/js/priority.js?ver=9.0.1; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/js/modernizr.js?ver=2.6.2; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/js/imagesLoaded.min.js?ver=4.1.4; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/js/jquery.fancybox.min.js?ver=7.0.1; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/js/superfish.js?ver=1.4.8; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/js/init.js?ver=9.0.1; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/js/touchswipe.min.js?ver=1.0; ResourceType: script
+INFO: Request: GET https://www.rearc.io/wp-includes/js/comment-reply.min.js?ver=5.9.3; ResourceType: script
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/css/jquery.fancybox.css?ver=9.0
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/style.css?ver=9.0.1
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/css/rgs.css?ver=9.0.1
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/css/responsive.css?ver=9.0.1
+INFO: Response: 200 https://www.rearc.io/wp-includes/js/jquery/jquery.min.js?ver=3.6.0
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/css/skin-material.css?ver=9.0.1
+INFO: Response: 200 https://www.rearc.io/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2
+INFO: Response: 200 https://www.rearc.io/wp-content/plugins/google-analytics-dashboard-for-wp/assets/js/frontend.min.js?ver=6.0.2
+INFO: Response: 200 https://www.rearc.io/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.1.7
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/js/priority.js?ver=9.0.1
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/js/modernizr.js?ver=2.6.2
+INFO: Request: GET https://rearc.livepoll.link/aws; ResourceType: document
+INFO: Request: GET https://rearc.livepoll.link/docker; ResourceType: document
+INFO: Request: GET https://rearc.livepoll.link/secret_word; ResourceType: document
+INFO: Response: 200 OK https://rearc.livepoll.link/aws
+INFO: Request: GET https://rearc.livepoll.link/loadbalanced; ResourceType: document
+INFO: Request: GET https://rearc.livepoll.link/tls; ResourceType: document
+INFO: Response: 200 OK https://rearc.livepoll.link/docker
+INFO: Response: 200 OK https://rearc.livepoll.link/secret_word
+INFO: Response: 200 OK https://rearc.livepoll.link/loadbalanced
+INFO: Response: 200 OK https://rearc.livepoll.link/tls
+INFO: Request: GET https://rearc.livepoll.link/; ResourceType: image
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/css/fonts/OpenSansBold-webfont.woff; ResourceType: font
+INFO: Request: GET https://rearc.livepoll.link/wp-content/uploads/2018/12/DIN-RegularAlternate.ttf; ResourceType: font
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/css/fonts/OpenSans-Semibold-webfont.woff; ResourceType: font
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/css/fonts/steadysets.ttf; ResourceType: font
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/css/fonts/fontawesome-webfont.woff?v=4.2; ResourceType: font
+INFO: Request: GET https://www.rearc.io/wp-content/themes/salient/css/fonts/OpenSans-Regular-webfont.woff; ResourceType: font
+INFO: Request: GET https://secure.gravatar.com/avatar/c862b8f5001d73131cccc44990a16e3d?s=80&d=mm&r=g; ResourceType: image
+ERROR: Response: 404 Not Found https://rearc.livepoll.link/wp-content/uploads/2018/12/rearc_logo_darkbackground_cmyk_2.png from original Request: GET https://rearc.livepoll.link/wp-content/uploads/2018/12/rearc_logo_darkbackground_cmyk_2.png; ResourceType: image
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/js/imagesLoaded.min.js?ver=4.1.4
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/js/jquery.fancybox.min.js?ver=7.0.1
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/js/init.js?ver=9.0.1
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/js/touchswipe.min.js?ver=1.0
+INFO: Response: 200 https://www.rearc.io/wp-includes/js/comment-reply.min.js?ver=5.9.3
+INFO: Response: 200 https://www.rearc.io/wp-content/uploads/2019/07/quest.gif
+INFO: Response: 200 https://www.google-analytics.com/analytics.js
+INFO: Response: 200 https://www.rearc.io/wp-includes/js/wp-emoji-release.min.js?ver=5.9.3
+INFO: Response: 200 https://www.rearc.io/wp-content/uploads/2018/11/Logo.png
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/js/superfish.js?ver=1.4.8
+INFO: Response: 200 https://secure.gravatar.com/avatar/c862b8f5001d73131cccc44990a16e3d?s=80&d=mm&r=g
+INFO: Response: 304 Not Modified https://rearc.livepoll.link/
+ERROR: Response: 404 Not Found https://rearc.livepoll.link/wp-content/uploads/2018/12/DIN-RegularAlternate.ttf from original Request: GET https://rearc.livepoll.link/wp-content/uploads/2018/12/DIN-RegularAlternate.ttf; ResourceType: font
+ERROR: Request failed. ErrorText: net::ERR_ABORTED. Request: GET https://rearc.livepoll.link/wp-content/uploads/2018/12/DIN-RegularAlternate.ttf; ResourceType: font
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/css/fonts/OpenSansBold-webfont.woff
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/css/fonts/fontawesome-webfont.woff?v=4.2
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/css/fonts/steadysets.ttf
+INFO: Request: POST https://www.google-analytics.com/j/collect?v=1&_v=j96&a=1521381501&t=pageview&_s=1&dl=https%3A%2F%2Frearc.livepoll.link%2F&ul=en-us&de=UTF-8&dt=quest001001222%20-%20Rearc&sd=24-bit&sr=1920x1080&vp=1920x1080&je=0&_u=YEBAAUABCAAAAC~&jid=1577175674&gjid=205310225&cid=1441090102.1659305833&tid=UA-132341328-1&_gid=831357877.1659305833&_r=1&_slc=1&z=853987251; ResourceType: xhr
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/css/fonts/OpenSans-Semibold-webfont.woff
+INFO: Response: 200 https://www.rearc.io/wp-content/themes/salient/css/fonts/OpenSans-Regular-webfont.woff
+INFO: Request: GET https://graph.facebook.com/?id=https://rearc.livepoll.link/&callback=jQuery360043870159941394093_1659305831791&_=1659305831792; ResourceType: script
+INFO: Request: GET https://api.pinterest.com/v1/urls/count.json?url=https://rearc.livepoll.link/&callback=jQuery360043870159941394093_1659305831793&_=1659305831794; ResourceType: script
+INFO: Response: 200 https://www.google-analytics.com/j/collect?v=1&_v=j96&a=1521381501&t=pageview&_s=1&dl=https%3A%2F%2Frearc.livepoll.link%2F&ul=en-us&de=UTF-8&dt=quest001001222%20-%20Rearc&sd=24-bit&sr=1920x1080&vp=1920x1080&je=0&_u=YEBAAUABCAAAAC~&jid=1577175674&gjid=205310225&cid=1441090102.1659305833&tid=UA-132341328-1&_gid=831357877.1659305833&_r=1&_slc=1&z=853987251
+INFO: Response: 200 https://graph.facebook.com/?id=https://rearc.livepoll.link/&callback=jQuery360043870159941394093_1659305831791&_=1659305831792
+INFO: Response: 200 https://api.pinterest.com/v1/urls/count.json?url=https://rearc.livepoll.link/&callback=jQuery360043870159941394093_1659305831793&_=1659305831794
+INFO: Step succeeded: rearc.livepoll.link URL: https://rearc.livepoll.link/
+INFO: Publishing result and duration CloudWatch metrics with timestamp: Sun Jul 31 2022 22:17:04 GMT+0000 (Coordinated Universal Time) for canaryName: quest-index stepName: rearc.livepoll.link result: PASSED startDateTimeInUTC: Sun Jul 31 2022 22:17:11 GMT+0000 (Coordinated Universal Time) endDateTimeInUTC: Sun Jul 31 2022 22:17:12 GMT+0000 (Coordinated Universal Time)
+INFO: Uploading files to S3 ["/tmp/01-rearc.livepoll.link-loaded.png"]
+INFO: Files successfully uploaded to S3
+INFO: Customer canary response: undefined
+INFO: Finished executing customer steps
+INFO: Har generation stopped
+INFO: Browser closed
+INFO: Finished writing har file
+INFO: Publishing result and duration CloudWatch metrics with timestamp: Sun Jul 31 2022 22:17:04 GMT+0000 (Coordinated Universal Time) for canaryName: quest-index stepName: null result: PASSED startDateTimeInUTC: Sun Jul 31 2022 22:17:11 GMT+0000 (Coordinated Universal Time) endDateTimeInUTC: Sun Jul 31 2022 22:17:30 GMT+0000 (Coordinated Universal Time)
+INFO: Getting list of files under /tmp to upload to S3.
+INFO: Checking list of files under /tmp to see if they are actual files.
+INFO: List of actual files under /tmp ["/tmp/2022-07-31T22-17-06-118Z-log.txt","/tmp/SyntheticsReport-PASSED.json","/tmp/results.har.html"]
+INFO: Uploading files to S3 ["/tmp/2022-07-31T22-17-06-118Z-log.txt","/tmp/SyntheticsReport-PASSED.json","/tmp/results.har.html"]
