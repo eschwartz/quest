@@ -47,4 +47,13 @@ exec('bin/006 ' + JSON.stringify(req.headers), (err, stdout, stderr) => {
 });
 });
 
+// Health check endpoint
+// Will be used by ECS to know that this task is health
+// ECS will restart the service, if this returns a non-2xx status
+// To check this endpoint, run:
+//  curl --fail http://localhost/health
+app.get('/health', function (req, res) {
+  res.sendStatus(200);
+});
+
 app.listen(port, () => console.log(`Rearc quest listening on port ${port}!`))
