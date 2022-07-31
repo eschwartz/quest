@@ -1,3 +1,7 @@
 # Do not copy node_modules from host machine into container image
 # We want package-lock.json to be the final truth in dep version
 node_modules/
+
+# deployment tools, should not be included with application code
+terraform/
+scripts/
