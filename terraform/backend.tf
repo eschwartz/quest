@@ -3,7 +3,6 @@
 # to access the same deployment
 terraform {
   backend "s3" {
-    bucket = "507409530905-terraform"
     key    = "rearc/quest.json"
     region = "us-east-1"
   }
