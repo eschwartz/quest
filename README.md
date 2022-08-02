@@ -7,7 +7,7 @@
 
 A code challenge to assess cloud skills.
 
-Completed by Edan Schwartz for Rearc, Aug 5, 2022.
+Completed by Edan Schwartz for Rearc, Aug 2, 2022.
 
 See [INSTRUCTIONS.md](./INSTRUCTIONS.md)
 
