@@ -12,15 +12,15 @@ See [INSTRUCTIONS.md](./INSTRUCTIONS.md)
 
 ## Background
 
-I approached this challenge as if it were for a client. Knowing the story of this imaginary client helped focus my efforts and prioritize some work over others:
+I approached this challenge as if it were for a client. Knowing the story of this imaginary client helped me focus my efforts and prioritize some work over others:
 
-- They are new to cloud technology, and looking for a proof of concept to deploy containers.
+- The client is new to cloud technology, and looking for a proof of concept to deploy containers.
 - They do not yet have a "cloud strategy". The goal here is not to create one for them, but give them a concrete starting point, from which they can consider different approaches.
 
 As such, my approach is to:
 - Deploy a system that is as minimal as possible.
 - Avoid opinionated architecture decisions, but surface those considerations in written documented.
-- Reasonably limit my time investment, as the client is not yet paying for our services. But also give them enough to understand our approach as an organization.
+- Reasonably limit my time investment, as the client is not yet paying for our services. But also give them enough to understand our approach.
 
 ## Solution
 
@@ -51,7 +51,7 @@ There is in fact a valid TLS certificate on the domain, as shown in this screens
 
 http://quest-api-b030937aae9732e6.elb.us-east-1.amazonaws.com/
 
-<img src="./quest-nlb.png" width=500 title="Live site with TLS">
+<img src="./quest-nlb.png" width=500>
 
 > you have not configured a loadbalancer yet OR your request did not traverse a loadbalancer OR we were unable to detect a loadbalancer
 
@@ -61,7 +61,7 @@ My guess is that the load balancer is not detected because we're using a Network
 
 There is CloudWatch metric on ECS HealthyHost counts:
 
-<img src="./cloudwatch-healthyhosts-alarm.png" width=500 title="Live site with TLS">
+<img src="./cloudwatch-healthyhosts-alarm.png" width=500>
 
 Host health is determined by the health check configured on the ECS task. In this case, the container is making a request to `GET /health` and expecting a HTTP 2xx response:
 
@@ -72,15 +72,31 @@ app.get('/health', function (req, res) {
 });
 ```
 
-ECS Task Configuration:
+**ECS Task Configuration:**
 
-<img src="./ecs-task-definition.png" width=500 title="Live site with TLS">
+<img src="./ecs-task-definition.png" width="500">
 
 In addition to the health check, you can see that the `SECRET_WORD` environment variable is coming from SSM Parameter store. This has a few advantages:
 
 - Keep the environment variable out of shared code (eg, in terraform config)
 - Allow fine-grained access control to secrets via IAM
 - Allow programmatic access to secrets, enabling automatic rotation, and potentially eliminating human access to certain secrets.
+
+**ECS Service**
+
+<img src="./ecs.png" width="500">
+
+**Network Load Balancer**
+
+<img src="./load-balancer.png" width="500">
+
+**ACM TLS Cert**
+
+<img src="./acm.png" width="500">
+
+**SSM Parameter Store**
+
+<img src="./ssm.png" width="500">
 
 ## Next Steps
 
