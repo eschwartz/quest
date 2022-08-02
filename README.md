@@ -67,13 +67,19 @@ _Notes_
 
 There is in fact a valid TLS certificate on the domain, as shown in this screenshot. This could be failing because TLS is terminating at the load balancer, so it is not detectable from the origin server.
 
-**Load balancer public DNS**
 
-[http://quest-api-b030937aae9732e6.elb.us-east-1.amazonaws.com/](http://quest-api-b030937aae9732e6.elb.us-east-1.amazonaws.com/)
+**ACM TLS Cert**
 
-<img src="./quest-nlb.png" width=500>
+<img src="./acm.png" width="500">
+
+
+**Network Load Balancer**
+
+<img src="./load-balancer.png" width="500">
 
 > you have not configured a loadbalancer yet OR your request did not traverse a loadbalancer OR we were unable to detect a loadbalancer
+
+[http://quest-api-b030937aae9732e6.elb.us-east-1.amazonaws.com/](http://quest-api-b030937aae9732e6.elb.us-east-1.amazonaws.com/)
 
 My guess is that the load balancer is not detected because we're using a Network Load Balancer (NLB), not an Application Load Balancer (ALB). NLBs forward TCP traffic directly to the origin server, so, for example, there wouldn't be a `X-Forwarded-For` header.
 
@@ -109,14 +115,6 @@ In addition to the health check, you can see that the `SECRET_WORD` environment 
 **SSM Parameter Store**
 
 <img src="./ssm.png" width="500">
-
-**Network Load Balancer**
-
-<img src="./load-balancer.png" width="500">
-
-**ACM TLS Cert**
-
-<img src="./acm.png" width="500">
 
 ## Next Steps
 
