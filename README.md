@@ -132,6 +132,8 @@ For anyone new to the cloud, or learning new services, I would recommend getting
 
 As a side note, this was a major motivation for the open source [Disposable Cloud Environment](https://dce.readthedocs.io/en/latest/home.html) I worked on at Optum: to provide low-risk sandbox cloud environments for engineers, and get them on a path toward IaC.
 
+If you're looking for proof of Terraform expertise, I would refer you to the [terraform modules I contributed to in the Disposable Cloud Environment github repo](https://github.com/Optum/dce/tree/9c9d193/modules).
+
 ### CI/CD
 
 A mature software project would include CI/CD pipelines to automate building, testing, and deploying the application and infrastructure layers. 
