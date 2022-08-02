@@ -1,0 +1,103 @@
+{
+  "canaryName": "quest-index",
+  "startTime": "2022-07-31T22:17:04.882Z",
+  "endTime": "2022-07-31T22:17:30.267Z",
+  "timeSpentInResetInMs": 1,
+  "timeSpentInLaunchInMs": 4840,
+  "timeSpentInSetUpInMs": 13,
+  "executionStatus": "SUCCEEDED",
+  "executionError": null,
+  "customerScript": {
+    "startTime": "2022-07-31T22:17:11.112Z",
+    "endTime": "2022-07-31T22:17:30.131Z",
+    "status": "PASSED",
+    "failureReason": null,
+    "metricsPublished": true,
+    "requests": {
+      "failed": 1,
+      "_2xx": 39,
+      "_4xx": 2,
+      "_5xx": 0,
+      "_3xx": 0
+    },
+    "steps": [
+      {
+        "stepNum": 1,
+        "stepName": "rearc.livepoll.link",
+        "startTime": "2022-07-31T22:17:11.129Z",
+        "endTime": "2022-07-31T22:17:12.951Z",
+        "status": "PASSED",
+        "failureReason": null,
+        "metricsPublished": true,
+        "sourceUrl": "about:blank",
+        "destinationUrl": "https://rearc.livepoll.link/",
+        "screenshots": [
+          {
+            "fileName": "01-rearc.livepoll.link-loaded.png",
+            "pageUrl": "https://rearc.livepoll.link/",
+            "error": null,
+            "visualTestResult": null
+          }
+        ]
+      }
+    ],
+    "reports": [],
+    "nonStepScreenshots": []
+  },
+  "configuration": {
+    "screenshotConfiguration": {
+      "screenshotOnStepStart": false,
+      "screenshotOnStepSuccess": false,
+      "screenshotOnStepFailure": false
+    },
+    "artifactConfiguration": {
+      "harFile": true,
+      "stepsReport": true
+    },
+    "reportingConfiguration": {
+      "includeRequestHeaders": true,
+      "includeResponseHeaders": true,
+      "includeUrlPassword": false,
+      "restrictedHeaders": [],
+      "includeRequestBody": false,
+      "includeResponseBody": false,
+      "restrictedUrlParameters": []
+    },
+    "loggingConfiguration": {
+      "logRequest": true,
+      "logResponse": true,
+      "logResponseBody": false,
+      "logRequestBody": false,
+      "logRequestHeaders": false,
+      "logResponseHeaders": false
+    },
+    "executionConfiguration": {
+      "continueOnStepFailure": true,
+      "continueOnHttpStepFailure": true
+    },
+    "stepMetricsConfiguration": {
+      "stepSuccessMetric": true,
+      "stepDurationMetric": true
+    },
+    "canaryMetricsConfiguration": {
+      "failedRequestsMetric": true,
+      "_2xxMetric": true,
+      "_4xxMetric": true,
+      "_5xxMetric": true,
+      "aggregatedFailedRequestsMetric": true,
+      "aggregated2xxMetric": true,
+      "aggregated4xxMetric": true,
+      "aggregated5xxMetric": true,
+      "failedCanaryMetric": true,
+      "aggregatedFailedCanaryMetric": true,
+      "visualMonitoringTotalComparisonsMetric": false,
+      "visualMonitoringSuccessPercentMetric": true
+    },
+    "visualMonitoringConfiguration": {
+      "visualCompareWithBaseRun": false,
+      "failCanaryRunOnVisualVariance": true,
+      "varianceHighlightHexColor": "#fafa00",
+      "visualVarianceThreshold": 0.02
+    }
+  }
+}

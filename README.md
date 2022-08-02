@@ -1,65 +1,205 @@
-# A quest in the clouds
+# <img src="https://www.rearc.io/wp-content/uploads/2018/11/Logo.png" height="18"> Quest
 
-### Q. What is this quest?
 
-It is a fun way to assess your cloud skills. It is also a good representative sample of the work we do at Rearc. Quest is a webapp made with node.js and golang.
+<img src="https://www.rearc.io/wp-content/uploads/2019/07/quest.gif" height="100" /> 
 
-### Q. So what skills should I have ?
-Public cloud (AWS, GCP, Azure). More than one cloud is a "good to have" but one is a "must have". General cloud concepts, especially networking. Docker (containerization). IaC (Infrastructure as code). Linux/Unix. Git. TLS certs is a plus.
+**Deployed application: https://rearc.livepoll.link/**
 
-### Q. What do I have to do ?
-You may do all or some of the following tasks. Please read over the complete list before starting.
+A code challenge to assess cloud skills.
 
-1. If you know how to use git, start a git repository (local-only is acceptable) and commit all of your work to it.
-2. Deploy the app in any public cloud and navigate to the index page. Use Linux 64-bit x86/64 as your OS (Amazon Linux preferred in AWS, Similar Linux flavor preferred in GCP and Azure)
-3. Deploy the app in a Docker container. Use `node` as the base image. Version `node:10` or later should work.
-4. Inject an environment variable (`SECRET_WORD`) in the Docker container. The value of `SECRET_WORD` should be the secret word discovered on the index page of the application.
-5. Deploy a load balancer in front of the app.
-6. Use Infrastructure as Code (IaC) to "codify" your deployment. Terraform is ideal, but use whatever you know, e.g. CloudFormation, CDK, Deployment Manager, etc.
-7. Add TLS (https). You may use locally-generated certs.
+Completed by Edan Schwartz for Rearc, Aug 2, 2022.
 
-### Q. How do I know I have solved these stages?
-Each stage can be tested as follows (where `<ip_or_host>` is the location where the app is deployed):
+See [INSTRUCTIONS.md](./INSTRUCTIONS.md)
 
-1. Public cloud & index page (contains the secret word) - `http(s)://<ip_or_host>[:port]/`
-2. Docker check - `http(s)://<ip_or_host>[:port]/docker`
-3. Secret Word check - `http(s)://<ip_or_host>[:port]/secret_word`
-4. Load Balancer check  - `http(s)://<ip_or_host>[:port]/loadbalanced`
-5. TLS check - `http(s)://<ip_or_host>[:port]/tls`
+## Contents
 
-### Q. Do I have to do all these?
-You may do whichever, and however many, of the tasks above as you'd like. We suspect that once you start, you won't be able to stop. It's addictive. Extra credit if you are able to submit working entries for more than one cloud provider.
+<!-- toc -->
 
-### Q. What do I have to submit?
-1. Your work assets, as one or both of the following:
-  - A link to a hosted git repository.
-  - A ZIP file containing your project directory. Include the `.git` sub-directory if you used git.
-2. Proof of completion, as one or both of the following:
-  - Link(s) to hosted public cloud deployment(s).
-  - One or more screenshots showing, at least, the index page of the final deployment in one or more public cloud(s) you have chosen.
-3. An answer to the prompt: "Given more time, I would improve..."
-  - Discuss any shortcomings/immaturities in your solution and the reasons behind them (lack of time is a perfectly fine reason!)
-  - **This may carry as much weight as the code itself**
+- [Background](#background)
+- [Solution](#solution)
+  * [Screenshots](#screenshots)
+- [Next Steps](#next-steps)
+  * [Infrastructure as Code](#infrastructure-as-code)
+  * [CI/CD](#cicd)
+  * [Monitoring and Log Aggregation](#monitoring-and-log-aggregation)
+  * [Networking](#networking)
+  * [Security, Policy, and Governance](#security-policy-and-governance)
+- [Deploying the App](#deploying-the-app)
 
-Your work assets should include:
+<!-- tocstop -->
 
-- IaC files, if you completed that task.
-- One or more Dockerfiles, if you completed that task.
-- A sensible README or other file(s) that contain instructions, notes, or other written documentation to help us review and assess your submission.
+## Background
 
-### Q. How long do I need to host my submission on public cloud(s)?
-You don't have to at all if you don't want to. You can run it in public cloud(s), grab a screenshot, then tear it all down to avoid costs.
+I approached this challenge as if it were for a client. Considering the story of this imaginary client helped me focus my efforts and prioritize some work over others:
 
-If you _want_ to host it longer for us to view it, we recommend taking a screenshot anyway and sending that along with the link. Then you can tear down the quest whenever you want and we'll still have the screenshot. We recommend waiting no longer than one week after sending us the link before tearing it down.
+- The client is new to cloud technology, and looking for a proof of concept to deploy containers.
+- They do not yet have a "cloud strategy". The goal here is not to create one for them, but give them a concrete starting point, from which they can consider different approaches.
 
-### Q. What if I successfully complete all the challenges?
-We have many more for you to solve as a member of the Rearc team!
+As such, my approach is to:
 
-### Q. What if I find a bug?
-Awesome! Tell us you found a bug along with your submission and we'll talk more!
+- Deploy a system that is as minimal as possible.
+- Avoid opinionated architecture decisions, but surface those considerations in written documented.
+- Reasonably limit my time investment, as the client is not yet paying for our services. But also give them enough to understand our approach.
 
-### Q. What if I fail?
-There is no fail. Complete whatever you can and then submit your work. Doing _everything_ in the quest is not a guarantee that you will "pass" the quest, just like not doing something is not a guarantee you will "fail" the quest.
+## Solution
 
-### Q. Can I share this quest with others?
-No.
+The deployed system includes:
+
+- A private **docker image registry**, using AWS ECR
+- An AWS ECS Fargate cluster, running a single container for the provided Node.js server
+- A secret value held in AWS SSM parameter store, and pulled in as an environment variable to the ECS service.
+- A load balancer routing traffic to the ECS service, using AWS NLB
+- A TLS certificate generated by AWS ACM, verified via AWS Route 53, and attached to the load balancer.
+- A CloudWatch alarm that will send an SMS message if the ECS health check fails (ie, a `GET /health` request does not return HTTP 2xx) 
+
+
+### Screenshots
+
+**Live Site**
+
+At [https://rearc.livepoll.link](https://rearc.livepoll.link)
+
+<img src="./quest-tls.png" width=500 title="Live site with TLS">
+
+_Notes_
+
+> you have not configured TLS (https) yet OR your request did not traverse via an https endpoint
+
+There is in fact a valid TLS certificate on the domain, as shown in this screenshot. This could be failing because TLS is terminating at the load balancer, so it is not detectable from the origin server.
+
+
+**ACM TLS Cert**
+
+<img src="./acm.png" width="500">
+
+
+**Network Load Balancer**
+
+<img src="./load-balancer.png" width="500">
+
+> you have not configured a loadbalancer yet OR your request did not traverse a loadbalancer OR we were unable to detect a loadbalancer
+
+[http://quest-api-b030937aae9732e6.elb.us-east-1.amazonaws.com/](http://quest-api-b030937aae9732e6.elb.us-east-1.amazonaws.com/)
+
+My guess is that the load balancer is not detected because we're using a Network Load Balancer (NLB), not an Application Load Balancer (ALB). NLBs forward TCP traffic directly to the origin server, so, for example, there wouldn't be a `X-Forwarded-For` header.
+
+**ECS Service**
+
+<img src="./ecs.png" width="500">
+
+**ECS Health Checks**
+
+There is a CloudWatch metric on ECS HealthyHost counts:
+
+<img src="./cloudwatch-healthyhosts-alarm.png" width=500>
+
+Host health is determined by the health check configured on the ECS task. In this case, the container is making a request to `GET /health` and expecting a HTTP 2xx response:
+
+```js
+// Add this endpoint to 000.js
+app.get('/health', function (req, res) {
+  res.sendStatus(200);
+});
+```
+
+**ECS Task Configuration:**
+
+<img src="./ecs-task-definition.png" width="500">
+
+In addition to the health check, you can see that the `SECRET_WORD` environment variable is coming from SSM Parameter store. This has a few advantages:
+
+- Keep the environment variable out of shared code (eg, in terraform config and state)
+- Allow fine-grained access control to secrets via IAM
+- Allow programmatic access to secrets, enabling automatic rotation, and potentially eliminating human access to certain secrets.
+
+**SSM Parameter Store**
+
+<img src="./ssm.png" width="500">
+
+## Next Steps
+
+> Given more time, I would improve..
+
+### Infrastructure as Code
+
+The one missing requirement in this submission is Terraform modules to codify the cloud infrastructure. Terraform would allow for a more detailed review of my architecture, and for automated reproduction of the entire stack (eg, via a CI/CD pipeline).
+
+There is a minimal terraform module in [`/terraform`](./terraform/), which deploys an ECR repo. The [`docker-push.sh`](./scripts/docker-push.sh) command references "output" values from the terraform state, to access the ECR repo url.
+
+I made this tradeoff in the interest of time. IaC tools are a must-have for modern cloud infrastructure, but they are also a considerable investment of time compared to "point and click" work in the AWS console.
+
+For anyone new to the cloud, or learning new services, I would recommend getting a feel in the AWS console _first_ for how everything fits together. Then come back and automate and harden.
+
+As a side note, this was a major motivation for the open source [Disposable Cloud Environment](https://dce.readthedocs.io/en/latest/home.html) I worked on at Optum: to provide low-risk sandbox cloud environments for engineers, and get them on a path toward IaC.
+
+If you're looking for proof of Terraform expertise, I would refer you to the [terraform modules I contributed to in the Disposable Cloud Environment github repo](https://github.com/Optum/dce/tree/9c9d193/modules).
+
+### CI/CD
+
+A mature software project would include CI/CD pipelines to automate building, testing, and deploying the application and infrastructure layers. 
+
+Depending on the structure of the team/organization, there may be multiple types of pipelines:
+
+- Build, test, and deploy the app to production, test, and PR environments.
+- Deploy infrastructure (eg, from Terraform code) to AWS. 
+
+Teams may want to split up the infrastructure pipelines, as well, especially if AWS accounts are shared between projects:
+
+- Network layer (VPC, subnets, etc)
+- Data layer (database, network file systems, etc)
+- Application layer (ECS, EC2, Lambda, etc)
+
+This allows the higher levels of infrastructure to be shared between applications. It's also less risky to deploy application infrastructure changes vs DB or VPC changes, so those pipelines may be run more often.
+
+### Monitoring and Log Aggregation
+
+CloudWatch bring some powerful monitoring tools "out of the box" with most types of application deployments. For this project, I setup a basic "ECS Healthy Hosts" alarm, but its fairly simple to setup alarms against multiple cloud components and facets.
+
+I would recommend at least some monitoring that follows the full network path, eg. periodic requests against a public URL or API endpoint. I will often run these checks against staging deployments, to build confidence before promoting to production. 
+
+I did experiment briefly with [CloudWatch Synthetic Canaries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html), which are new to me. There's built in support and templates for puppeteer and selenium test scripts. You can see a sample report in [`/canary`](./canary/).
+
+Application logs may be aggregated and queried using CloudWatch Logs insights. Queries can be saved to a CloudWatch Dashboard. For example, you could prepare a dashboard to display HTTP 5xx access logs, code exceptions, and API request counts to see if exceptions tend to increase under heavy load.
+
+### Networking
+
+I am using public subnets and security groups open to the web on 80 and 443. This opens the possibility, for example, for clients to bypass the load balancer and access origin servers directly.
+
+A more secure option may be to define separate public and private subnets. The load balancer would live in the public subnet, with open access on 443, while the ECS service would only allow ingress from the load balancer.
+
+Security group can further fine-tune network access. For example, we can restrict ECS ingress on port 80 to only come from the load balancer.
+
+### Security, Policy, and Governance
+
+Especially within larger organizations, you will need some controls to ensure that teams are following security policy and best practices. 
+
+AWS Config allows for continuous monitoring of cloud deployments and changes. For example, you could detect the deployment of ECS clusters into public subnets, and send a notification, or even remediate by terminating the cluster.
+
+
+
+## Deploying the App
+
+This app requires manual creation of ECS resources (see [Next Steps](#next-steps)), including:
+
+- An ECS cluster named `quest`
+- An ECS services named `quest-api`
+
+There is a minimal terraform module to deploy a docker registry using AWS ECR:
+
+```
+cd terraform
+# Replace S3_BUCKET with the name of an S3 bucket, in which to store state
+terraform init -backend-config="bucket=S3_BUCKET"
+terraform apply
+```
+
+Application code can then be deployed using:
+
+```
+npm run deploy
+```
+
+This will:
+- Build a docker container, tagged as `quest:latest`
+- Push the container to ECR
+- Update ECS to to use the new docker image, and redeploy

@@ -1,0 +1,7 @@
+# Do not commit node_modules to git
+# These tend to be large, and can be recreated via pacakge-lock.json
+node_modules/
+
+# Terraform state and deps
+.terraform/
+.terraform.lock.hcl
