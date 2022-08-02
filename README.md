@@ -1,14 +1,17 @@
-# Rearc Quest
+# <img src="https://www.rearc.io/wp-content/uploads/2018/11/Logo.png" height="18"> Quest
 
-Deployed application: https://rearc.livepoll.link/
 
-![the force](https://www.rearc.io/wp-content/uploads/2019/07/quest.gif)
+<img src="https://www.rearc.io/wp-content/uploads/2019/07/quest.gif" height="100" /> 
+
+**Deployed application: https://rearc.livepoll.link/**
 
 A code challenge to assess cloud skills.
 
 Completed by Edan Schwartz for Rearc, Aug 5, 2022.
 
 See [INSTRUCTIONS.md](./INSTRUCTIONS.md)
+
+## Contents
 
 <!-- toc -->
 
