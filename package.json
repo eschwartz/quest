@@ -16,5 +16,6 @@
   },
   "keywords": [],
   "author": "Rearc",
-  "license": "ISC"
+  "license": "UNLICENSED",
+  "private": true
 }
